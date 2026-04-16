@@ -8,13 +8,13 @@ if(!isset($_SESSION['user_id'])) {
     exit();
 }
 
-$stmt=$cbd->prepare("SELECT SUM(montant) FROM depenses WHERE user_id = ? AND MONTH(date_depense)=MONTH(NOW()) AND  YEAR(date_depense) = YEAR(NOW())");
+$sql1 = "SELECT SUM(montant) FROM depenses WHERE user_id = ? AND EXTRACT(MONTH FROM date_depense)=EXTRACT(MONTH FROM NOW()) AND EXTRACT(YEAR FROM date_depense) = EXTRACT(YEAR FROM NOW())";
+$stmt=$cbd->prepare(convertSQL($sql1, $db_type));
 $stmt->execute([$_SESSION['user_id']]);
 $total_depenses = $stmt->fetchColumn();
 
-
-
-$stmt=$cbd->prepare("SELECT MAX(montant) FROM depenses WHERE  user_id = ? AND MONTH(date_depense)=MONTH(NOW()) AND  YEAR(date_depense) = YEAR(NOW())");
+$sql2 = "SELECT MAX(montant) FROM depenses WHERE  user_id = ? AND EXTRACT(MONTH FROM date_depense)=EXTRACT(MONTH FROM NOW()) AND EXTRACT(YEAR FROM date_depense) = EXTRACT(YEAR FROM NOW())";
+$stmt=$cbd->prepare(convertSQL($sql2, $db_type));
 $stmt->execute([$_SESSION['user_id']]);
 $depense_sup = $stmt->fetchColumn();
 

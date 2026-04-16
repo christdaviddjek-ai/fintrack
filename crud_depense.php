@@ -20,7 +20,7 @@ if(isset($_GET['mois']) && $_GET['mois'] !== '') {
     if(count($mois_parts) == 2) {
         $annee = (int)$mois_parts[0];
         $mois = (int)$mois_parts[1];
-        $query .= " AND YEAR(depenses.date_depense) = ? AND MONTH(depenses.date_depense) = ?";
+        $query .= " AND EXTRACT(YEAR FROM depenses.date_depense) = ? AND EXTRACT(MONTH FROM depenses.date_depense) = ?";
         $params[] = $annee;
         $params[] = $mois;
     }
