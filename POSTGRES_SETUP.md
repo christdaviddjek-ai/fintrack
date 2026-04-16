@@ -1,6 +1,7 @@
 # 📱 Guide d'installation fintrack sur Render avec PostgreSQL
 
 ## 🎯 Vue d'ensemble
+
 Ce guide explique comment déployer l'application **fintrack** sur Render avec une base de données PostgreSQL.
 
 ---
@@ -46,14 +47,14 @@ Ce guide explique comment déployer l'application **fintrack** sur Render avec u
 1. Dans le Web Service, aller à l'onglet **"Environment"**
 2. Ajouter les variables (depuis les credentials PostgreSQL copied):
 
-| Variable | Valeur |
-|----------|--------|
-| `DB_HOST` | Hostname de PostgreSQL |
-| `DB_PORT` | `5432` |
-| `DB_NAME` | Database name |
-| `DB_USER` | Username |
-| `DB_PASSWORD` | Password |
-| `DB_TYPE` | `postgres` |
+| Variable      | Valeur                 |
+| ------------- | ---------------------- |
+| `DB_HOST`     | Hostname de PostgreSQL |
+| `DB_PORT`     | `5432`                 |
+| `DB_NAME`     | Database name          |
+| `DB_USER`     | Username               |
+| `DB_PASSWORD` | Password               |
+| `DB_TYPE`     | `postgres`             |
 
 3. Cliquer sur **"Save"**
 4. Render va **automatiquement redéployer** l'app
@@ -84,13 +85,16 @@ Une fois déployé et initialisé:
 ## 🔧 Dépannage
 
 ### ❌ Erreur: "Connection refused"
+
 → Vérifier que les variables d'environnement sont correctes
 → Vérifier que PostgreSQL est bien créé et accessible
 
 ### ❌ Erreur: "Database not found"
+
 → Aller sur `/install_postgres.php` pour initialiser
 
 ### ❌ Les filtres ne fonctionnent pas
+
 → Vérifier que `DB_TYPE=postgres` est défini
 → La fonction `convertSQL()` transforme les requêtes automatiquement
 
