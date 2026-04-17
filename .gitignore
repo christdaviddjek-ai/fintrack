@@ -1,6 +1,7 @@
 # Fichiers et répertoires à ignorer
 config.php
 config_advanced.php
+google_config.php
 *.env
 .env.local
 .env.*.local

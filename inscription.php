@@ -97,6 +97,27 @@ if (isset($_POST['envoyer'])) {
             <button type="submit" name="envoyer" class="btn btn-primary btn-block btn-lg">
                 Créer mon compte →
             </button>
+
+            <div class="form-divider">
+                <span>OU</span>
+            </div>
+
+            <?php
+            require_once 'google_config.php';
+            
+            // Construire l'URL OAuth Google
+            $google_auth_url = 'https://accounts.google.com/o/oauth2/v2/auth?' . http_build_query([
+                'client_id' => GOOGLE_CLIENT_ID,
+                'redirect_uri' => GOOGLE_REDIRECT_URI,
+                'response_type' => 'code',
+                'scope' => 'openid email profile',
+                'access_type' => 'offline'
+            ]);
+            ?>
+
+            <a href="<?php echo htmlspecialchars($google_auth_url); ?>" class="btn btn-secondary btn-block" style="background: white; color: #1f2937; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; gap: 8px;">
+                🔐 Continuer avec Google
+            </a>
         </form>
 
         <div class="form-footer">
