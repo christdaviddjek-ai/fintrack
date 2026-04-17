@@ -48,6 +48,7 @@ $repart = $stmt->fetchAll();
                 <li><a href="dashbordd.php" class="active">Tableau de bord</a></li>
                 <li><a href="crud_depense.php">Mes dépenses</a></li>
                 <li><a href="ajouter.php">+ Ajouter</a></li>
+                <li><a href="profil.php">Mon Profil</a></li>
                 <li><a href="logout.php">Déconnexion</a></li>
             </ul>
         </div>

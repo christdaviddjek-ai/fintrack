@@ -57,6 +57,7 @@ $categories = $stmt->fetchAll();
                 <li><a href="dashbordd.php">Tableau de Bord</a></li>
                 <li><a href="crud_depense.php" class="active">Mes Dépenses</a></li>
                 <li><a href="ajouter.php">Ajouter Dépense</a></li>
+                <li><a href="profil.php">Mon Profil</a></li>
                 <li><a href="logout.php">Déconnexion</a></li>
             </ul>
         </div>
