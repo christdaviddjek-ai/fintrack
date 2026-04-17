@@ -64,7 +64,7 @@ if(isset($_GET['id'])) {
             <input type="hidden" name="id" value="<?php echo $depense['id']; ?>">
 
             <div class="form-group">
-                <label for="montant">Montant (€)</label>
+                <label for="montant">Montant (Fr CFA)</label>
                 <input type="number" id="montant" name="montant" value="<?php echo $depense['montant']; ?>" step="0.01" required>
             </div>
 

@@ -109,7 +109,7 @@ $categories = $stmt->fetchAll();
                     <tbody>
                         <?php foreach($depenses as $row): ?>
                             <tr>
-                                <td style="font-weight: bold; color: #667eea;"><?php echo number_format($row['montant'], 2); ?> €</td>
+                                <td style="font-weight: bold; color: #667eea;"><?php echo number_format($row['montant'], 2); ?> Fr</td>
                                 <td>
                                     <span style="background-color: #ebf8ff; color: #2c5282; padding: 4px 8px; border-radius: 4px; font-size: 14px;">
                                         <?php echo htmlspecialchars($row['nom']); ?>
