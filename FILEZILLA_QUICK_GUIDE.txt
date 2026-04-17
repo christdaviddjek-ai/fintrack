@@ -1,0 +1,114 @@
+╔════════════════════════════════════════════════════════════════╗
+║  UPLOAD AVEC FILEZILLA - GUIDE RAPIDE                          ║
+╚════════════════════════════════════════════════════════════════╝
+
+⚡ SOLUTION LA PLUS SIMPLE & SÛRE
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1️⃣  TÉLÉCHARGE FILEZILLA
+   👉 https://filezilla-project.org/download.php
+   Choisis "FileZilla Client" (la version gratuite)
+
+2️⃣  INSTALLE & OUVRE FILEZILLA
+
+3️⃣  REMPLIS LES INFOS (en haut)
+
+   Host: tusite.infinityfree.net
+   ↓ Change "tusite" par TON domaine!
+   Ex: monsite123.infinityfree.net
+   
+   Username: if0_41685322
+   ↓ Tu trouves ça dans https://members.infinityfree.net
+   
+   Password: [Ton mot de passe FTP]
+   ↓ Pas ton mot de passe de login!
+   
+   Port: 21 (automatique)
+
+4️⃣  CLIQUE "QUICKCONNECT"
+   ✅ Si connexion OK → "connected" en bas
+   ❌ Si erreur → Vérifie les identifiants
+
+5️⃣  DANS FILEZILLA
+
+   À GAUCHE (Local):
+   📁 C:\wamp64\www\gest_depes
+   
+   À DROITE (Remote):
+   📁 public_html (il doit avoir des fichiers dedans)
+
+6️⃣  SÉLECTIONNE CES FICHIERS À GAUCHE
+   (Ctrl+Click pour multi-sélectionner)
+   
+   CRITIQUES (NOUVEAU/MODIFIÉ):
+   ✓ google_callback.php         (NOUVEAU)
+   ✓ google_config.php           (NOUVEAU - AVEC TES CLÉS!)
+   ✓ inscription.php             (MODIFIÉ)
+   ✓ connexion.php               (MODIFIÉ)
+   ✓ profil.php                  (NOUVEAU)
+   ✓ styles.css                  (MODIFIÉ)
+
+7️⃣  CLIQUE DROIT SUR LES FICHIERS SÉLECTIONNÉS
+   👉 Upload
+   
+   FileZilla commence l'upload...
+   
+   ✅ Attends: "226 Transfer complete" pour chaque fichier
+
+8️⃣  REFESH LE SITE
+   👉 https://tonsite.infinityfree.net
+   Appuie Ctrl+F5 (rafraîchissement forcé du cache)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+⚠️  IMPORTANT: google_config.php DOIT CONTENIR TES CLÉS!
+
+Avant upload, édite google_config.php:
+
+define('GOOGLE_CLIENT_ID', '123456789-abc.apps.googleusercontent.com');
+define('GOOGLE_CLIENT_SECRET', 'GOCSPX-xxxxxxx');
+define('GOOGLE_REDIRECT_URI', 'https://tonsite.infinityfree.net/google_callback.php');
+
+Remplace TON_SITE par ton vrai domaine!
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🆘 ERREURS COURANTES
+
+❌ "Connection refused"
+   → FTP n'est pas activé
+   → https://members.infinityfree.net (vérifie l'onglet FTP)
+
+❌ "530 User authentication failed"
+   → Mauvais identifiant ou mot de passe
+   → Réinitialise le mot de passe FTP
+
+❌ "Permission denied" (fichier déjà sur serveur)
+   → Remplace le fichier existant (clique Oui quand demandé)
+
+❌ Les fichiers sont uploadés mais le site ne change pas
+   → Rafraîchis: Ctrl+Shift+R (plus agressif que Ctrl+F5)
+   → Vide le cache du navigateur
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✅ APRÈS L'UPLOAD
+
+1. Visite: https://tonsite.infinityfree.net/inscription.php
+   Tu dois voir "Continuer avec Google" ✓
+
+2. Clique sur le bouton
+   Tu dois être redirigé vers Google
+
+3. Autorise l'accès
+   Puis tu reviens à tonsite
+
+4. Tout fonctionne? ✅ C'EST BON!
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Questions? Voir:
+  • UPLOAD_SOLUTIONS.md (3 solutions au complet)
+  • UPLOAD_CHECKLIST.md (avant l'upload)
+  • GOOGLE_OAUTH_SETUP.md (config Google API)
