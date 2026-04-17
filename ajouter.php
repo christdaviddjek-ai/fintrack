@@ -65,7 +65,7 @@ $categories = $stmt->fetchAll();
         <form action="" method="POST">
             <div class="form-group">
                 <label for="montant">Montant (Fr CFA)</label>
-                <input type="number" id="montant" name="montant" placeholder="Ex: 25.50" step="0.01" required>
+                <input type="number" id="montant" name="montant" placeholder="Ex: 25000 Fr" step="0.01" required>
             </div>
 
             <div class="form-group">

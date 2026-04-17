@@ -91,7 +91,7 @@ if (isset($_POST['envoyer'])) {
 
             <div class="form-group">
                 <label for="revenu">Revenu mensuel (Fr CFA)</label>
-                <input type="number" id="revenu" name="revenu" placeholder="Ex : 2500" step="0.01" min="0" required>
+                <input type="number" id="revenu" name="revenu" placeholder="Ex: 500000 Fr" step="0.01" min="0" required>
             </div>
 
             <button type="submit" name="envoyer" class="btn btn-primary btn-block btn-lg">

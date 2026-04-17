@@ -130,7 +130,7 @@ if (!isset($_SESSION['csrf_token'])) {
                             step="0.01"
                             min="0"
                             required
-                            placeholder="Ex: 500000"
+                            placeholder="Ex: 500000 Fr"
                         >
                     </div>
 
