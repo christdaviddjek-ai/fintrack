@@ -1,0 +1,11 @@
+# Fichiers et répertoires à ignorer
+config.php
+config_advanced.php
+*.env
+.env.local
+.env.*.local
+/vendor
+/node_modules
+.DS_Store
+*.log
+debug.log

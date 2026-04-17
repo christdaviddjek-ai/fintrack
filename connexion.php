@@ -1,29 +1,50 @@
 <?php 
 session_start();
 include 'config.php';
+include 'security.php';
 
 $error_message = '';
+$csrf_token = generateCSRFToken();
 
 if (isset($_POST['submit'])) {
-    $email = htmlspecialchars($_POST['email']);
-    $password = htmlspecialchars($_POST['mdp']);
-
-    $stmt = $cbd->prepare("SELECT id, nom, email, mot_de_passe FROM users WHERE email = ?");
-    $stmt->execute([$email]);
-    $user = $stmt->fetch(PDO::FETCH_ASSOC);
-
-    if($user) {
-        if(password_verify($password, $user['mot_de_passe'])) {
-            $_SESSION['user_id'] = $user['id'];
-            $_SESSION['user_nom'] = $user['nom'];
-            header('Location: dashbordd.php');
-            exit();
-        } else {
-            $error_message = 'Mot de passe incorrect';
-        }
-    } else {
-        $error_message = 'Email introuvable';
+    // 1. VÉRIFIER CSRF TOKEN
+    if (!verifyCSRFToken($_POST['csrf_token'] ?? '')) {
+        $error_message = '⚠️ Erreur de sécurité: Token CSRF invalide';
     }
+    // 2. VÉRIFIER RATE LIMITING
+    else if (!checkLoginAttempts($_POST['email'] ?? '')) {
+        $error_message = '❌ Trop de tentatives. Réessaye dans 15 minutes.';
+        logSecurityEvent('LOGIN_BLOCKED', $_POST['email'] ?? 'unknown');
+    }
+    else {
+        $email = sanitizeInput($_POST['email'] ?? '');
+        $password = sanitizeInput($_POST['mdp'] ?? '');
+        
+        // 3. VALIDER EMAIL
+        if (!validateEmail($email)) {
+            $error_message = '❌ Email invalide';
+            incrementLoginAttempts($email);
+        } else {
+            // 4. CHERCHER USER
+            $stmt = $cbd->prepare("SELECT id, nom, email, mot_de_passe FROM users WHERE email = ?");
+            $stmt->execute([$email]);
+            $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            if($user && password_verify($password, $user['mot_de_passe'])) {
+                // LOGIN RÉUSSI
+                $_SESSION['user_id'] = $user['id'];
+                $_SESSION['user_nom'] = $user['nom'];
+                resetLoginAttempts($email);
+                logSecurityEvent('LOGIN_SUCCESS', $email);
+                secureSafeRedirect('dashbordd.php');
+            } else {
+                $error_message = '❌ Email ou mot de passe incorrect';
+                incrementLoginAttempts($email);
+                logSecurityEvent('LOGIN_FAILED', $email);
+            }
+        }
+    }
+}
 }
 ?>
 <!DOCTYPE html>
@@ -59,6 +80,9 @@ if (isset($_POST['submit'])) {
         <?php endif; ?>
 
         <form action="#" method="POST">
+            <!-- CSRF Token -->
+            <input type="hidden" name="csrf_token" value="<?php echo $csrf_token; ?>">
+            
             <div class="form-group">
                 <label for="email">Email</label>
                 <input type="email" id="email" name="email" placeholder="Entrez votre email" required>
